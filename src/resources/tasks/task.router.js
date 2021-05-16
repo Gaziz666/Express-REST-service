@@ -3,10 +3,10 @@ const Express = require('express');
 const Router = Express.Router();
 const taskController = require('./task.controller');
 
-Router.get('/', taskController.getMany)
-Router.post('/', taskController.create)
-Router.get('/:taskId', taskController.getOne)
-Router.put('/:taskId', taskController.updateOne)
-Router.delete('/:taskId', taskController.deleteOne)
+Router.get('/:boardId/tasks', taskController.getMany);
+Router.post('/:boardId/tasks', taskController.create);
+Router.get('/:boardId/tasks/:taskId', taskController.getOne);
+Router.put('/:boardId/tasks/:taskId', taskController.updateOne);
+Router.delete('/:boardId/tasks/:taskId', taskController.deleteOne);
 
 module.exports = Router;

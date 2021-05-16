@@ -9,19 +9,16 @@ const createTask = (
   userId,
   boardId,
   columnId
-) => {
-  if (boardIdParam === boardId) {
-    taskRepo.create(
-      boardIdParam,
-      title,
-      order,
-      description,
-      userId,
-      boardId,
-      columnId
-    );
-  }
-};
+) =>
+  taskRepo.createTask(
+    boardIdParam,
+    title,
+    order,
+    description,
+    userId,
+    boardId,
+    columnId
+  );
 
 const getOne = (boardId, taskId) => taskRepo.getOne(boardId, taskId);
 const updateOne = (

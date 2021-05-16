@@ -3,9 +3,9 @@ const Task = require('./task.model');
 
 module.exports = {
   getMany: async (boardId) =>
-    DB.Tasks.filter((task) => task.boardId === boardId)[0],
+    DB.Tasks.filter((task) => task.boardId === boardId),
 
-  create: async (
+  createTask: async (
     boardIdParam,
     title,
     order,
@@ -14,7 +14,14 @@ module.exports = {
     boardId,
     columnId
   ) => {
-    const task = new Task(title, order, description, userId, boardId, columnId);
+    const task = new Task(
+      title,
+      order,
+      description,
+      userId,
+      boardIdParam,
+      columnId
+    );
     try {
       await DB.Tasks.push(task);
     } catch (error) {
@@ -34,7 +41,7 @@ module.exports = {
 
   getOne: async (boardId, taskId) => {
     const result = await DB.Tasks.filter(
-      (task) => task.id === taskId && task.taskId === taskId
+      (task) => task.id === taskId && task.boardId === boardId
     )[0];
     return result;
   },
@@ -50,7 +57,7 @@ module.exports = {
     columnId
   ) => {
     for (let i = 0; i < DB.Tasks.length; i += 1) {
-      if (DB.Tasks[i].id === taskId && DB.Tasks[i].boardId === boardId) {
+      if (DB.Tasks[i].id === taskId && DB.Tasks[i].boardId === boardIdParam) {
         DB.Tasks[i].title = title || DB.Tasks[i].title;
         DB.Tasks[i].order = order || DB.Tasks[i].order;
         DB.Tasks[i].description = description || DB.Tasks[i].description;

@@ -22,7 +22,7 @@ app.use('/', (req, res, next) => {
 });
 
 app.use('/users', userRouter);
-app.use('/boards/:boardsId/tasks', taskRouter);
+app.use('/boards', taskRouter);
 app.use('/boards', boardRouter);
 
 module.exports = app;
