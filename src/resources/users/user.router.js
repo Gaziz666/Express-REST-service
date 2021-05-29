@@ -9,10 +9,10 @@ const usersController = require('./user.controller');
 //   // map user fields to exclude secret fields like "password"
 //   res.json(users.map(User.toResponse));
 // });
-Router.get('/', usersController.getMany)
-Router.post('/', usersController.create)
-Router.get('/:userId', usersController.getOne)
-Router.put('/:userId', usersController.updateOne)
-Router.delete('/:userId', usersController.deleteOne)
+Router.get('/', usersController.getMany);
+Router.post('/', usersController.create);
+Router.get('/:userId', usersController.getById);
+Router.put('/:userId', usersController.updateOne);
+Router.delete('/:userId', usersController.deleteOne);
 
 module.exports = Router;

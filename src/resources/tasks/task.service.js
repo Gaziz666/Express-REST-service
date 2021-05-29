@@ -1,46 +1,26 @@
 const taskRepo = require('./task.memory.repository');
 
-const getMany = (boardId) => taskRepo.getMany(boardId);
-const createTask = (
-  boardIdParam,
-  title,
-  order,
-  description,
-  userId,
-  boardId,
-  columnId
-) =>
-  taskRepo.createTask(
-    boardIdParam,
-    title,
-    order,
-    description,
-    userId,
-    boardId,
-    columnId
-  );
+const getMany = async (boardId) => {
+  const result = await taskRepo.getMany(boardId);
+  return result;
+};
+const createTask = async (boardIdParam, body) => {
+  console.log(boardIdParam);
+  const result = await taskRepo.createTask(boardIdParam, body);
+  return result;
+};
 
-const getOne = (boardId, taskId) => taskRepo.getOne(boardId, taskId);
-const updateOne = (
-  boardIdParam,
-  taskId,
-  title,
-  order,
-  description,
-  userId,
-  boardId,
-  columnId
-) =>
-  taskRepo.updateOne(
-    boardIdParam,
-    taskId,
-    title,
-    order,
-    description,
-    userId,
-    boardId,
-    columnId
-  );
-const deleteOne = (boardId, taskId) => taskRepo.deleteOne(boardId, taskId);
+const getById = async (boardId, taskId) => {
+  const result = await taskRepo.getById(boardId, taskId);
+  return result;
+};
+const updateOne = async (boardIdParam, taskId, body) => {
+  const result = await taskRepo.updateOne(boardIdParam, taskId, body);
+  return result;
+};
+const deleteOne = async (boardId, taskId) => {
+  const result = await taskRepo.deleteOne(boardId, taskId);
+  return result;
+};
 
-module.exports = { getMany, createTask, getOne, updateOne, deleteOne };
+module.exports = { getMany, createTask, getById, updateOne, deleteOne };

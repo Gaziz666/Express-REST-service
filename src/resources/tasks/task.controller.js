@@ -6,23 +6,16 @@ module.exports = {
     res.status(200).json(tasks);
   },
 
-  create: async (req, res) =>
+  create: async (req, res) => {
+    console.log(req.params);
+
     res
       .status(201)
-      .json(
-        await taskService.createTask(
-          req.params.boardId,
-          req.body.title,
-          req.body.order,
-          req.body.description,
-          req.body.userId,
-          req.body.boardId,
-          req.body.columnId
-        )
-      ),
-
-  getOne: async (req, res) => {
-    const task = await taskService.getOne(
+      .json(await taskService.createTask(req.params.boardId, req.body));
+  },
+  getById: async (req, res) => {
+    console.log(req.params);
+    const task = await taskService.getById(
       req.params.boardId,
       req.params.taskId
     );
@@ -34,21 +27,20 @@ module.exports = {
   },
 
   updateOne: async (req, res) => {
-    const task = await taskService.updateOne(
-      req.params.boardId,
-      req.params.taskId,
-      req.body.title,
-      req.body.order,
-      req.body.description,
-      req.body.userId,
-      req.body.boardId,
-      req.body.columnId
-    );
-    if (!task) {
-      res.status(404).json({});
-      return;
+    try {
+      const task = await taskService.updateOne(
+        req.params.boardId,
+        req.params.taskId,
+        req.body
+      );
+      if (!task) {
+        res.status(404).json({});
+        return;
+      }
+      res.status(200).json(task);
+    } catch (err) {
+      res.status(500).json(err);
     }
-    res.status(200).json(task);
   },
 
   deleteOne: async (req, res) => {
@@ -56,8 +48,8 @@ module.exports = {
       req.params.boardId,
       req.params.taskId
     );
-    console.log('deleted', result);
-    if (result) {
+
+    if (result[0]) {
       res.status(200).json(result);
     } else {
       res.status(404).json(result);
