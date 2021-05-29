@@ -37,15 +37,5 @@ module.exports = {
 
     await destroyMany((task) => task.boardId !== deletedBoards[0].id, 'Tasks');
     return deletedBoards[0];
-    // if (newboards.length === DB.Boards) {
-    //   return null;
-    // }
-    // DB.Boards = newboards;
-    // const newTasks = await DB.Tasks.filter((task) => task.boardId !== boardId);
-    // if (newTasks.length === DB.Tasks) {
-    //   return null;
-    // }
-    // DB.Tasks = newTasks;
-    // return 'deleted';
   },
 };

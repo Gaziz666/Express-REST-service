@@ -9,7 +9,6 @@ class Task {
     this.userId = userId || null;
     this.boardId = boardId;
     this.columnId = columnId || null;
-    console.log(title, order, description, userId, boardId, columnId);
   }
 }
 
