@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.boardService = void 0;
+const board_memory_repository_1 = require("./board.memory.repository");
+const getMany = () => board_memory_repository_1.boardRepo.getMany();
+const createBoard = (title, columns) => board_memory_repository_1.boardRepo.create(title, columns);
+const getOne = (boardId) => board_memory_repository_1.boardRepo.getOne(boardId);
+const updateOne = (boardId, body) => board_memory_repository_1.boardRepo.updateOne(boardId, body);
+const deleteOne = (boardId) => board_memory_repository_1.boardRepo.deleteOne(boardId);
+const boardService = { getMany, createBoard, getOne, updateOne, deleteOne };
+exports.boardService = boardService;
