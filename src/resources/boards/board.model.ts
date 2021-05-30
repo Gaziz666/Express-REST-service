@@ -3,7 +3,7 @@ import uuid from 'uuid';
 export type ColumnType = { id: string; title: string; order: number };
 
 class Board {
-  // [key: string]: string | Array<{ id: string; title: string; order: number }>;
+  [key: string]: string | Array<{ id: string; title: string; order: number }>;
 
   id: string;
 

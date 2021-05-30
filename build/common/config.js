@@ -9,7 +9,7 @@ dotenv_1.default.config({
     path: path_1.default.join(__dirname, '../../.env'),
 });
 exports.default = {
-    PORT: process.env['PORT'],
+    PORT: process.env['SERVER_PORT'],
     NODE_ENV: process.env['NODE_ENV'],
     MONGO_CONNECTION_STRING: process.env['MONGO_CONNECTION_STRING'],
     JWT_SECRET_KEY: process.env['JWT_SECRET_KEY'],

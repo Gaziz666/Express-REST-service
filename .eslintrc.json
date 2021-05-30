@@ -43,8 +43,7 @@
   "rules": {
     "dot-notation": [
       "error",
-      { "allowKeywords": false },
-      { "allowPattern": "^[a-z]+(_[a-z]+)+$" }
+      { "allowKeywords": false, "allowPattern": "^[a-zA-Z]+(_[a-zA-Z]+)+$" }
     ],
     "import/extensions": "off",
     "linebreak-style": "off",

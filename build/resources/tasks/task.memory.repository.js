@@ -8,6 +8,7 @@ const taskRepo = {
         const result = await inMemoryDb_1.getMany(inMemoryDb_1.DbName.Tasks, (task) => task.boardId === boardId);
         if (result)
             return result;
+        return [];
     },
     createTask: async (boardId, body) => {
         const { title, order, description, userId, columnId } = body;

@@ -20,8 +20,8 @@ const userController = {
       ),
 
   getById: async (req: Request, res: Response) => {
-    if (!req.params['userId']) return;
-    const user = await usersService.getOne(req.params['userId']);
+    if (!req.params.userId) return;
+    const user = await usersService.getOne(req.params.userId);
     if (!user) {
       res.status(404).json({});
       return;
@@ -30,8 +30,8 @@ const userController = {
   },
 
   updateOne: async (req: Request, res: Response) => {
-    if (!req.params['userId']) return;
-    const user = await usersService.updateOne(req.params['userId'], req.body);
+    if (!req.params.userId) return;
+    const user = await usersService.updateOne(req.params.userId, req.body);
     if (!user) {
       res.status(404).json({});
       return;
@@ -40,8 +40,8 @@ const userController = {
   },
 
   deleteOne: async (req: Request, res: Response) => {
-    if (!req.params['userId']) return;
-    const result = await usersService.deleteOne(req.params['userId']);
+    if (!req.params.userId) return;
+    const result = await usersService.deleteOne(req.params.userId);
     if (result) {
       res.status(204).json(result);
     } else {

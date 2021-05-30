@@ -1,7 +1,7 @@
 import uuid from 'uuid';
 
 class User {
-  // [index: string]: string;
+  [index: string]: string;
 
   id: string;
 

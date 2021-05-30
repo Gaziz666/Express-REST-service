@@ -12,4 +12,4 @@ Router.get('/', user_controller_1.userController.getMany);
 Router.post('/', user_controller_1.userController.create);
 Router.get('/:userId', user_controller_1.userController.getById);
 Router.put('/:userId', user_controller_1.userController.updateOne);
-Router.delete('/:userId', user_controller_1.userController.deleteOne);
+Router["delete"]('/:userId', user_controller_1.userController.deleteOne);

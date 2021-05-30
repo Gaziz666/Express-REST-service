@@ -12,4 +12,4 @@ Router.get('/:boardId/tasks/', task_controller_1.taskController.getMany);
 Router.post('/:boardId/tasks/', task_controller_1.taskController.create);
 Router.get('/:boardId/tasks/:taskId', task_controller_1.taskController.getById);
 Router.put('/:boardId/tasks/:taskId', task_controller_1.taskController.updateOne);
-Router.delete('/:boardId/tasks/:taskId', task_controller_1.taskController.deleteOne);
+Router["delete"]('/:boardId/tasks/:taskId', task_controller_1.taskController.deleteOne);

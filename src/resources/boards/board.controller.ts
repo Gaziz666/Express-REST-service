@@ -13,8 +13,8 @@ const create = async (req: Request, res: Response) =>
     .json(await boardService.createBoard(req.body.title, req.body.columns));
 
 const getOne = async (req: Request, res: Response) => {
-  if (!req.params['boardId']) return res.status(428);
-  const board = await boardService.getOne(req.params['boardId']);
+  if (!req.params.boardId) return res.status(428);
+  const board = await boardService.getOne(req.params.boardId);
   if (!board) {
     return res.status(404).json({});
   }
@@ -22,8 +22,8 @@ const getOne = async (req: Request, res: Response) => {
 };
 
 const updateOne = async (req: Request, res: Response) => {
-  if (!req.params['boardId']) return res.status(428);
-  const board = await boardService.updateOne(req.params['boardId'], req.body);
+  if (!req.params.boardId) return res.status(428);
+  const board = await boardService.updateOne(req.params.boardId, req.body);
   if (!board) {
     return res.status(404).json({});
   }
@@ -31,8 +31,8 @@ const updateOne = async (req: Request, res: Response) => {
 };
 
 const deleteOne = async (req: Request, res: Response) => {
-  if (!req.params['boardId']) return res.status(428);
-  const result = await boardService.deleteOne(req.params['boardId']);
+  if (!req.params.boardId) return res.status(428);
+  const result = await boardService.deleteOne(req.params.boardId);
   if (result) {
     return res.status(204).json(result);
   }

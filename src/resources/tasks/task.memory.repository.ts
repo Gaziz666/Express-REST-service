@@ -16,6 +16,7 @@ const taskRepo = {
       (task) => (task as Task).boardId === boardId
     );
     if (result) return result as Array<Task>;
+    return [];
   },
 
   createTask: async (

@@ -1,7 +1,7 @@
 import uuid from 'uuid';
 
 class Task {
-  // [key: string]: string | number | null;
+  [key: string]: string | number | null;
 
   id: string;
 
