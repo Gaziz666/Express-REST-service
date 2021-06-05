@@ -48,7 +48,6 @@ const usersRepo = {
       DbName.Users
     );
     await assignMany('userId', userId, DbName.Tasks);
-
     return deletedUsers![0];
   },
 };

@@ -1,12 +1,25 @@
 import { usersRepo } from './user.memory.repository';
 
-const getMany = () => usersRepo.getMany();
-const createUser = (name: string, login: string, password: string) =>
-  usersRepo.create(name, login, password);
-const getOne = (userId: string) => usersRepo.getOne(userId);
-const updateOne = (userId: string, body: { [key: string]: string }) =>
-  usersRepo.updateOne(userId, body);
-const deleteOne = (userId: string) => usersRepo.deleteOne(userId);
+const getMany = async () => {
+  const result = await usersRepo.getMany();
+  return result;
+};
+const createUser = async (name: string, login: string, password: string) => {
+  const result = await usersRepo.create(name, login, password);
+  return result;
+};
+const getOne = async (userId: string) => {
+  const result = await usersRepo.getOne(userId);
+  return result;
+};
+const updateOne = async (userId: string, body: { [key: string]: string }) => {
+  const result = await usersRepo.updateOne(userId, body);
+  return result;
+};
+const deleteOne = async (userId: string) => {
+  const result = await usersRepo.deleteOne(userId);
+  return result;
+};
 
 const usersService = { getMany, createUser, getOne, updateOne, deleteOne };
 export { usersService };

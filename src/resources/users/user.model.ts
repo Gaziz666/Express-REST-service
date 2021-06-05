@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import uuid = require('uuid');
 
 class User {
   [index: string]: string;

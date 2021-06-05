@@ -41,20 +41,20 @@
     "prettier"
   ],
   "rules": {
-    "dot-notation": [
-      "error",
-      { "allowKeywords": false, "allowPattern": "^[a-zA-Z]+(_[a-zA-Z]+)+$" }
-    ],
+    // "dot-notation": [
+    //   "error",
+    //   { "allowKeywords": false, "allowPattern": "^[a-zA-Z]+(_[a-zA-Z]+)+$" }
+    // ],
     "import/extensions": "off",
     "linebreak-style": "off",
     "node/no-unsupported-features/es-syntax": "off",
     "no-underscore-dangle": "off",
-    "import/prefer-default-export": "off",
-    "node/no-extraneous-import": [
-      "error",
-      {
-        "allowModules": ["express"]
-      }
-    ]
+    "import/prefer-default-export": "off"
+    // "node/no-extraneous-import": [
+    //   "error",
+    //   {
+    //     "allowModules": ["express"]
+    //   }
+    // ]
   }
 }

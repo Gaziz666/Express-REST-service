@@ -1,7 +1,7 @@
-import uuid from 'uuid';
+import uuid = require('uuid');
 
 class Task {
-  [key: string]: string | number | null;
+  [index: string]: string | number | null;
 
   id: string;
 
@@ -11,11 +11,11 @@ class Task {
 
   description: string;
 
-  userId: string;
+  userId: string | null;
 
-  boardId: string;
+  boardId: string | null;
 
-  columnId: string;
+  columnId: string | null;
 
   constructor({
     title = 'Autotest task',

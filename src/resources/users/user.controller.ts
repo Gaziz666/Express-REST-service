@@ -3,9 +3,13 @@ import { usersService } from './user.service';
 import { User } from './user.model';
 
 const userController = {
-  getMany: async (res: Response) => {
-    const users = await usersService.getMany();
-    res.status(200).json(users);
+  getMany: async (req: Request, res: Response) => {
+    if (req.method) {
+      const users = await usersService.getMany();
+      if (users) {
+        res.status(200).json(users);
+      }
+    }
   },
 
   create: async (req: Request, res: Response) =>
@@ -20,8 +24,8 @@ const userController = {
       ),
 
   getById: async (req: Request, res: Response) => {
-    if (!req.params.userId) return;
-    const user = await usersService.getOne(req.params.userId);
+    if (!req.params['userId']) return;
+    const user = await usersService.getOne(req.params['userId']);
     if (!user) {
       res.status(404).json({});
       return;
@@ -30,8 +34,8 @@ const userController = {
   },
 
   updateOne: async (req: Request, res: Response) => {
-    if (!req.params.userId) return;
-    const user = await usersService.updateOne(req.params.userId, req.body);
+    if (!req.params['userId']) return;
+    const user = await usersService.updateOne(req.params['userId'], req.body);
     if (!user) {
       res.status(404).json({});
       return;
@@ -40,8 +44,8 @@ const userController = {
   },
 
   deleteOne: async (req: Request, res: Response) => {
-    if (!req.params.userId) return;
-    const result = await usersService.deleteOne(req.params.userId);
+    if (!req.params['userId']) return;
+    const result = await usersService.deleteOne(req.params['userId']);
     if (result) {
       res.status(204).json(result);
     } else {

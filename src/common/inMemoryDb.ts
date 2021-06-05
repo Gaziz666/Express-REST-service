@@ -15,50 +15,9 @@ const DB: DBType = {
   Tasks: [],
 };
 
-/**
- * array methods callback
- * @callback dbCallback
- * @param {object} callback item
- * @return {boolean}
- */
-
 // eslint-disable-next-line no-unused-vars
 type Callback = (params: User | Board | Task) => boolean;
 
-/**
- * User object properties
- * @typedef {Object} User
- * @property {string} id how the user id
- * @property {string} name user name
- * @property {string} login login
- * @property {string} password password
- */
-
-/**
- * @typedef {Object} Board
- * @property {string} id board id
- * @property {string} title board title
- * @property {Array<Object<string>>} columns list of columns
- */
-
-/**
- * @typedef {Object} Task
- * @property {string} id task id
- * @property {string} title task title
- * @property {string} order task order
- * @property {string} description task description
- * @property {string} userId user id
- * @property {string} boardId board id
- * @property {string} columnId column id
- */
-
-/**
- *
- * find one
- * @param {Callback} cb cb for array method
- * @param {DbName} db db name
- * @return {User|Board|Task} result
- */
 const findOne = async (
   cb: Callback,
   db: DbName
@@ -67,13 +26,6 @@ const findOne = async (
   return result;
 };
 
-/**
- *
- *
- * @param {string} dbcb for array method
- * @param {dbCallback} cb db name
- * @return {User|Board|Task} result
- */
 const getMany = async (
   db: DbName,
   cb?: Callback
@@ -86,14 +38,6 @@ const getMany = async (
   return result;
 };
 
-/**
- *
- *
- * @param {dbCallback} cb cb for array method
- * @param {User|Board|Task} obj db name
- * @param {string} db db name
- * @return {User|Board|Task} result
- */
 const update = async (
   cb: Callback,
   obj: { [key: string]: string | number | Array<ColumnType> },
@@ -103,13 +47,6 @@ const update = async (
   return Object.assign(one, obj);
 };
 
-/**
- *
- *
- * @param {dbCallback} cb cb for array method
- * @param {string} db db name
- * @return {User|Board|Task} result
- */
 const destroy = async (
   cb: Callback,
   db: DbName
@@ -122,13 +59,6 @@ const destroy = async (
   return [];
 };
 
-/**
- *
- * delete many object from db
- * @param {dbCallback} cb cb for array method
- * @param {string} db db name
- * @return {avoid} result
- */
 const destroyMany = async (cb: Callback, db: DbName) => {
   if (DB[db]) {
     const filterData = await DB[db]!.filter(cb);
@@ -136,14 +66,6 @@ const destroyMany = async (cb: Callback, db: DbName) => {
   }
 };
 
-/**
- *
- * unassign
- * @param {string} param db key name
- * @param {string} attr attribute name
- * @param {string} db db name
- * @return {User|Board|Task} result
- */
 const assignMany = async (
   param: string,
   attr:
@@ -154,9 +76,12 @@ const assignMany = async (
   db: DbName
 ): Promise<void> => {
   for (let i = 0; i < DB[db]!.length; i += 1) {
+    console.log(DB[db]![i]);
     if (DB[db]![i]![param] === attr) {
+      console.log(attr);
       DB[db]![i]![param] = null;
     }
+    console.log(DB[db]![i]);
   }
 };
 

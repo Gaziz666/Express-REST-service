@@ -8,6 +8,6 @@ Router.get('/', userController.getMany);
 Router.post('/', userController.create);
 Router.get('/:userId', userController.getById);
 Router.put('/:userId', userController.updateOne);
-Router["delete"]('/:userId', userController.deleteOne);
+Router.delete('/:userId', userController.deleteOne);
 
 export { Router };

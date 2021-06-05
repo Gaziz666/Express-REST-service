@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import uuid = require('uuid');
 
 export type ColumnType = { id: string; title: string; order: number };
 
