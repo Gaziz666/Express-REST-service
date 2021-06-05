@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import createError from 'http-errors';
 import { taskService } from './task.service';
 
 const taskController = {
@@ -30,8 +31,7 @@ const taskController = {
         req.params['taskId']
       );
       if (!task) {
-        res.status(404).json({});
-        throw new Error('task not found');
+        throw createError(404, `task not found`);
       }
       res.status(200).json(task);
     } catch (err) {
@@ -48,8 +48,7 @@ const taskController = {
         req.body
       );
       if (!task) {
-        res.status(404).json({});
-        throw new Error('task not found');
+        throw createError(404, `task not found`);
       }
       res.status(200).json(task);
     } catch (err) {
@@ -69,8 +68,7 @@ const taskController = {
       if (result && result[0]) {
         res.status(200).json(result);
       } else {
-        res.status(404).json(result);
-        throw new Error('task not found');
+        throw createError(404, `task not found`);
       }
     } catch (err) {
       next(err);

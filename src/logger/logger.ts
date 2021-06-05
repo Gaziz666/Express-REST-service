@@ -3,6 +3,7 @@ import fs from 'fs';
 
 type ErrorHandlerType = {
   message: string;
+  status: number;
 };
 
 export const logger = (
@@ -32,7 +33,8 @@ export const errorLogger = (
   res: Response,
   next: NextFunction
 ): void => {
-  console.log('error logger');
+  res.status(error.status || 500);
+  res.json({ message: error.message });
   req.method;
   const ws = fs.createWriteStream(`logs/errorLog.txt`, {
     flags: 'a',
@@ -40,7 +42,7 @@ export const errorLogger = (
   const date = new Date();
 
   ws.write(
-    `${date}, errorStatus: ${res.statusCode}, message: ${error.message}\n`
+    `${date}, errorStatus: ${error.status}, message: ${error.message}\n`
   );
   ws.close();
   next();

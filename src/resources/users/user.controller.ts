@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import createError from 'http-errors';
 import { usersService } from './user.service';
 import { User } from './user.model';
 
@@ -33,8 +34,7 @@ const userController = {
       if (!req.params['userId']) return;
       const user = await usersService.getOne(req.params['userId']);
       if (!user) {
-        res.status(400).json({});
-        throw new Error('user not found');
+        throw createError(404, `user not found`);
       }
       res.status(200).json(User.toResponse(user as User));
     } catch (err) {
@@ -47,8 +47,7 @@ const userController = {
       if (!req.params['userId']) return;
       const user = await usersService.updateOne(req.params['userId'], req.body);
       if (!user) {
-        res.status(404).json({});
-        throw new Error(`user with id: ${req.params['userId']} not found`);
+        throw createError(404, `user not found`);
       }
       res.status(200).json(User.toResponse(user as User));
     } catch (err) {
@@ -63,8 +62,7 @@ const userController = {
       if (result) {
         res.status(204).json(result);
       } else {
-        res.status(404).json(result);
-        throw new Error('user not found');
+        throw createError(404, `user not found`);
       }
     } catch (err) {
       next(err);

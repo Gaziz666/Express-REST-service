@@ -11,6 +11,7 @@ import { errorLogger, logger } from './logger/logger';
 
 type ErrorHandlerType = {
   message: string;
+  status: number;
 };
 
 const app = express();
