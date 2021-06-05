@@ -1,0 +1,71 @@
+import { Request, NextFunction, Response } from 'express';
+import fs from 'fs';
+
+type ErrorHandlerType = {
+  message: string;
+  status: number;
+};
+
+export const logger = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  const ws = fs.createWriteStream(`logs/log.txt`, {
+    flags: 'a',
+  });
+  const date = new Date();
+
+  ws.write(
+    `${date}, url: ${req.url}, body: ${JSON.stringify(
+      req.body
+    )}, query params: ${JSON.stringify(req.params)}, statusCode: ${
+      res.statusCode
+    }\n`
+  );
+  ws.close();
+  next();
+};
+
+export const errorLogger = (
+  error: ErrorHandlerType,
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  res.status(error.status || 500);
+  res.json({ message: error.message });
+  req.method;
+  const ws = fs.createWriteStream(`logs/errorLog.txt`, {
+    flags: 'a',
+  });
+  const date = new Date();
+
+  ws.write(
+    `${date}, errorStatus: ${error.status}, message: ${error.message}\n`
+  );
+  ws.close();
+  next();
+};
+
+export const uncaughtExceptionLogger = (err: Error): void => {
+  const ws = fs.createWriteStream(`logs/errorLog.txt`, {
+    flags: 'a',
+  });
+  const date = new Date();
+
+  ws.write(`${date}, uncaughtExceptionError: ${err}\n`);
+  ws.close();
+};
+
+export const unhandledRejectionLogger = (
+  p: Promise<PromiseRejectedResult>
+): void => {
+  const ws = fs.createWriteStream(`logs/errorLog.txt`, {
+    flags: 'a',
+  });
+  const date = new Date();
+
+  ws.write(`${date}, uncaughtExceptionError: ${p}\n`);
+  ws.close();
+};
