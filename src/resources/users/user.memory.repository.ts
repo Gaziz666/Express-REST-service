@@ -27,19 +27,22 @@ const usersRepo = {
     return result;
   },
 
-  getOne: async (userId: string) => {
+  getOne: async (userId: string): Promise<User | undefined> => {
     const result = await findOne((user) => user.id === userId, DbName.Users);
-    return result;
+    return result as User;
   },
 
-  updateOne: async (userId: string, body: { [key: string]: string }) => {
+  updateOne: async (
+    userId: string,
+    body: { [key: string]: string }
+  ): Promise<User | undefined> => {
     const result = await update(
       (user) => user.id === userId,
       body,
       DbName.Users
     );
 
-    return result;
+    return result as User;
   },
 
   deleteOne: async (userId: string) => {
@@ -48,7 +51,7 @@ const usersRepo = {
       DbName.Users
     );
     await assignMany('userId', userId, DbName.Tasks);
-    return deletedUsers![0];
+    return deletedUsers?.[0];
   },
 };
 
