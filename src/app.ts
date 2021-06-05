@@ -50,6 +50,5 @@ process.on('uncaughtException', (err) => {
 process.on('unhandledRejection', (_reason, p) => {
   unhandledRejectionLogger(p);
 });
-Promise.reject(Error('Oops!'));
 
 export { app };

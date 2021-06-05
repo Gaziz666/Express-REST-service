@@ -1,4 +1,0 @@
-Sun Jun 06 2021 00:02:48 GMT+0500 (Yekaterinburg Standard Time), uncaughtExceptionError: [object Promise]
-Sun Jun 06 2021 00:03:46 GMT+0500 (Yekaterinburg Standard Time), uncaughtExceptionError: {}
-Sun Jun 06 2021 00:03:58 GMT+0500 (Yekaterinburg Standard Time), uncaughtExceptionError: {}
-Sun Jun 06 2021 00:04:34 GMT+0500 (Yekaterinburg Standard Time), uncaughtExceptionError: [object Promise]
