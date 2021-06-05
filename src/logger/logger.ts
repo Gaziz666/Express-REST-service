@@ -47,3 +47,25 @@ export const errorLogger = (
   ws.close();
   next();
 };
+
+export const uncaughtExceptionLogger = (err: Error): void => {
+  const ws = fs.createWriteStream(`logs/errorLog.txt`, {
+    flags: 'a',
+  });
+  const date = new Date();
+
+  ws.write(`${date}, uncaughtExceptionError: ${err}\n`);
+  ws.close();
+};
+
+export const unhandledRejectionLogger = (
+  p: Promise<PromiseRejectedResult>
+): void => {
+  const ws = fs.createWriteStream(`logs/errorLog.txt`, {
+    flags: 'a',
+  });
+  const date = new Date();
+
+  ws.write(`${date}, uncaughtExceptionError: ${p}\n`);
+  ws.close();
+};

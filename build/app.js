@@ -29,3 +29,11 @@ app.use((req, res, next) => logger_1.logger(req, res, next));
 app.use('/users', user_router_1.Router);
 app.use('/boards', task_router_1.Router);
 app.use('/boards', board_router_1.Router);
+app.use((err, req, res, next) => logger_1.errorLogger(err, req, res, next));
+process.on('uncaughtException', (err) => {
+    logger_1.uncaughtExceptionLogger(err);
+});
+process.on('unhandledRejection', (_reason, p) => {
+    logger_1.unhandledRejectionLogger(p);
+});
+Promise.reject(Error('Oops!'));

@@ -7,7 +7,12 @@ import { Request, Response, NextFunction } from 'express';
 import { Router as userRouter } from './resources/users/user.router';
 import { Router as boardRouter } from './resources/boards/board.router';
 import { Router as taskRouter } from './resources/tasks/task.router';
-import { errorLogger, logger } from './logger/logger';
+import {
+  errorLogger,
+  logger,
+  uncaughtExceptionLogger,
+  unhandledRejectionLogger,
+} from './logger/logger';
 
 type ErrorHandlerType = {
   message: string;
@@ -38,5 +43,13 @@ app.use(
   (err: ErrorHandlerType, req: Request, res: Response, next: NextFunction) =>
     errorLogger(err, req, res, next)
 );
+
+process.on('uncaughtException', (err) => {
+  uncaughtExceptionLogger(err);
+});
+process.on('unhandledRejection', (_reason, p) => {
+  unhandledRejectionLogger(p);
+});
+Promise.reject(Error('Oops!'));
 
 export { app };
