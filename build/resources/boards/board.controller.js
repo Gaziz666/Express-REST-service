@@ -2,9 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.boardController = void 0;
 const board_service_1 = require("./board.service");
-const getMany = async (res) => {
-    const boards = await board_service_1.boardService.getMany();
-    res.status(200).json(boards);
+const getMany = async (req, res) => {
+    if (req.method) {
+        const boards = await board_service_1.boardService.getMany();
+        if (boards) {
+            res.status(200).json(boards);
+        }
+    }
 };
 const create = async (req, res) => res
     .status(201)

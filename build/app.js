@@ -12,6 +12,7 @@ const yamljs_1 = __importDefault(require("yamljs"));
 const user_router_1 = require("./resources/users/user.router");
 const board_router_1 = require("./resources/boards/board.router");
 const task_router_1 = require("./resources/tasks/task.router");
+const logger_1 = require("./logger/logger");
 const app = express_1.default();
 exports.app = app;
 const swaggerDocument = yamljs_1.default.load(path_1.default.join(__dirname, '../doc/api.yaml'));
@@ -24,6 +25,7 @@ app.use('/', (req, res, next) => {
     }
     next();
 });
+app.use((req, res, next) => logger_1.logger(req, res, next));
 app.use('/users', user_router_1.Router);
 app.use('/boards', task_router_1.Router);
 app.use('/boards', board_router_1.Router);

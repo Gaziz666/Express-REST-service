@@ -12,4 +12,4 @@ Router.get('/', board_controller_1.boardController.getMany);
 Router.post('/', board_controller_1.boardController.create);
 Router.get('/:boardId', board_controller_1.boardController.getOne);
 Router.put('/:boardId', board_controller_1.boardController.updateOne);
-Router["delete"]('/:boardId', board_controller_1.boardController.deleteOne);
+Router.delete('/:boardId', board_controller_1.boardController.deleteOne);

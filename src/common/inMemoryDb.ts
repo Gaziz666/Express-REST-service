@@ -76,12 +76,9 @@ const assignMany = async (
   db: DbName
 ): Promise<void> => {
   for (let i = 0; i < DB[db]!.length; i += 1) {
-    console.log(DB[db]![i]);
     if (DB[db]![i]![param] === attr) {
-      console.log(attr);
       DB[db]![i]![param] = null;
     }
-    console.log(DB[db]![i]);
   }
 };
 

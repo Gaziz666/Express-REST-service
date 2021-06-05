@@ -30,7 +30,7 @@ const usersRepo = {
     deleteOne: async (userId) => {
         const deletedUsers = await inMemoryDb_1.destroy((user) => user.id === userId, inMemoryDb_1.DbName.Users);
         await inMemoryDb_1.assignMany('userId', userId, inMemoryDb_1.DbName.Tasks);
-        return deletedUsers[0];
+        return deletedUsers?.[0];
     },
 };
 exports.usersRepo = usersRepo;

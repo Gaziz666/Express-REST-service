@@ -4,9 +4,13 @@ exports.userController = void 0;
 const user_service_1 = require("./user.service");
 const user_model_1 = require("./user.model");
 const userController = {
-    getMany: async (res) => {
-        const users = await user_service_1.usersService.getMany();
-        res.status(200).json(users);
+    getMany: async (req, res) => {
+        if (req.method) {
+            const users = await user_service_1.usersService.getMany();
+            if (users) {
+                res.status(200).json(users);
+            }
+        }
     },
     create: async (req, res) => res
         .status(201)
