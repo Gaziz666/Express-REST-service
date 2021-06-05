@@ -1,33 +1,45 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { taskService } from './task.service';
 
 const taskController = {
-  getMany: async (req: Request, res: Response) => {
-    if (!req.params['boardId']) return;
-    const tasks = await taskService.getMany(req.params['boardId']);
-    res.status(200).json(tasks);
-  },
-
-  create: async (req: Request, res: Response) => {
-    if (!req.params['boardId'] || !req.body) return;
-    res
-      .status(201)
-      .json(await taskService.createTask(req.params['boardId'], req.body));
-  },
-  getById: async (req: Request, res: Response) => {
-    if (!req.params['boardId'] || !req.params['taskId']) return;
-    const task = await taskService.getById(
-      req.params['boardId'],
-      req.params['taskId']
-    );
-    if (!task) {
-      res.status(404).json({});
-      return;
+  getMany: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (!req.params['boardId']) return;
+      const tasks = await taskService.getMany(req.params['boardId']);
+      res.status(200).json(tasks);
+    } catch (err) {
+      next(err);
     }
-    res.status(200).json(task);
   },
 
-  updateOne: async (req: Request, res: Response) => {
+  create: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (!req.params['boardId'] || !req.body) return;
+      res
+        .status(201)
+        .json(await taskService.createTask(req.params['boardId'], req.body));
+    } catch (err) {
+      next(err);
+    }
+  },
+  getById: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (!req.params['boardId'] || !req.params['taskId']) return;
+      const task = await taskService.getById(
+        req.params['boardId'],
+        req.params['taskId']
+      );
+      if (!task) {
+        res.status(404).json({});
+        throw new Error('task not found');
+      }
+      res.status(200).json(task);
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  updateOne: async (req: Request, res: Response, next: NextFunction) => {
     try {
       if (!req.params['boardId'] || !req.params['taskId']) return;
       const task = await taskService.updateOne(
@@ -37,25 +49,31 @@ const taskController = {
       );
       if (!task) {
         res.status(404).json({});
-        return;
+        throw new Error('task not found');
       }
       res.status(200).json(task);
     } catch (err) {
       res.status(500).json(err);
+      next(err);
     }
   },
 
-  deleteOne: async (req: Request, res: Response) => {
-    if (!req.params['boardId'] || !req.params['taskId']) return;
-    const result = await taskService.deleteOne(
-      req.params['boardId'],
-      req.params['taskId']
-    );
+  deleteOne: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (!req.params['boardId'] || !req.params['taskId']) return;
+      const result = await taskService.deleteOne(
+        req.params['boardId'],
+        req.params['taskId']
+      );
 
-    if (result && result[0]) {
-      res.status(200).json(result);
-    } else {
-      res.status(404).json(result);
+      if (result && result[0]) {
+        res.status(200).json(result);
+      } else {
+        res.status(404).json(result);
+        throw new Error('task not found');
+      }
+    } catch (err) {
+      next(err);
     }
   },
 };

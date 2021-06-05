@@ -3,10 +3,15 @@ import express from 'express';
 import swaggerUI from 'swagger-ui-express';
 import path from 'path';
 import YAML from 'yamljs';
+import { Request, Response, NextFunction } from 'express';
 import { Router as userRouter } from './resources/users/user.router';
 import { Router as boardRouter } from './resources/boards/board.router';
 import { Router as taskRouter } from './resources/tasks/task.router';
-import { logger } from './logger/logger';
+import { errorLogger, logger } from './logger/logger';
+
+type ErrorHandlerType = {
+  message: string;
+};
 
 const app = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
@@ -28,5 +33,9 @@ app.use((req, res, next) => logger(req, res, next));
 app.use('/users', userRouter);
 app.use('/boards', taskRouter);
 app.use('/boards', boardRouter);
+app.use(
+  (err: ErrorHandlerType, req: Request, res: Response, next: NextFunction) =>
+    errorLogger(err, req, res, next)
+);
 
 export { app };
