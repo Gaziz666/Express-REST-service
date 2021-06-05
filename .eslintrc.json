@@ -6,27 +6,54 @@
     "jest": true,
     "node": true
   },
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 2021,
     "ecmaFeatures": {
       "impliedStrict": true
-    }
+    },
+    "project": "./tsconfig.json"
   },
   "settings": {
-    "noInlineConfig": true
+    "noInlineConfig": true,
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./tsconfig.json"
+      }
+    },
+    "node": {
+      "resolvePaths": ["node_modules/@types"],
+      "tryExtensions": [".js", ".json", ".node", ".ts", ".d.ts"]
+    }
   },
+  "plugins": ["@typescript-eslint", "import"],
   "extends": [
     "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:node/recommended",
-    "airbnb-base",
     "prettier"
   ],
   "rules": {
+    // "dot-notation": [
+    //   "error",
+    //   { "allowKeywords": false, "allowPattern": "^[a-zA-Z]+(_[a-zA-Z]+)+$" }
+    // ],
     "import/extensions": "off",
     "linebreak-style": "off",
     "node/no-unsupported-features/es-syntax": "off",
     "no-underscore-dangle": "off",
     "import/prefer-default-export": "off"
+    // "node/no-extraneous-import": [
+    //   "error",
+    //   {
+    //     "allowModules": ["express"]
+    //   }
+    // ]
   }
 }

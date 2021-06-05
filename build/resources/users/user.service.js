@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.usersService = void 0;
+const user_memory_repository_1 = require("./user.memory.repository");
+const getMany = () => user_memory_repository_1.usersRepo.getMany();
+const createUser = (name, login, password) => user_memory_repository_1.usersRepo.create(name, login, password);
+const getOne = (userId) => user_memory_repository_1.usersRepo.getOne(userId);
+const updateOne = (userId, body) => user_memory_repository_1.usersRepo.updateOne(userId, body);
+const deleteOne = (userId) => user_memory_repository_1.usersRepo.deleteOne(userId);
+const usersService = { getMany, createUser, getOne, updateOne, deleteOne };
+exports.usersService = usersService;
